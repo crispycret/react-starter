@@ -9,7 +9,6 @@ import './assets/css/App.css';
 
 
 
-
 function Header (props:any) {
   return (
     <div>
@@ -17,7 +16,6 @@ function Header (props:any) {
     </div>
   );
 }
-
 
 
 
@@ -32,12 +30,10 @@ function Home (props:any) {
 
 
 
-
 function App() {
   return (
     <div className="App">
       
-
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
@@ -45,7 +41,6 @@ function App() {
           <Route path='/dashboard' element={<Header props={{text:"Dashboard"}} />} />
         </Routes>
       </BrowserRouter>
-
 
     </div>
   );
