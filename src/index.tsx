@@ -1,8 +1,10 @@
+
+
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
 import './assets/bootstrap/5.1.3/css/bootstrap.min.css'
-
 import './assets/css/index.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -20,3 +22,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
   
+
+
+

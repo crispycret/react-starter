@@ -5,6 +5,7 @@ export interface TokenInterface {
     setToken: (userToken: string) => void;
     token: string;
     removeToken: () => void;
+    hasToken: () => boolean;
 }
 
 export const useToken = (): TokenInterface => {
@@ -28,9 +29,14 @@ export const useToken = (): TokenInterface => {
         setToken(null)
     }
 
+    function hasToken() {
+        return (token !== null && token !== "" && token !== undefined);
+    }
+
     return {
-        setToken: saveToken,
         token,
+        hasToken,
+        setToken: saveToken,
         removeToken
     } as TokenInterface;
 
@@ -38,3 +44,8 @@ export const useToken = (): TokenInterface => {
 
 
 export default useToken;
+
+
+
+
+
