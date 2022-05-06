@@ -11,8 +11,6 @@ import { Auth, AuthInterface } from './components/auth/auth';
 import Home from './pages/Home';
 
 
-
-
 function TestComponent (props:any) {
   return (
     <div>
@@ -22,12 +20,6 @@ function TestComponent (props:any) {
 }
 
 
-
-// Interface for the props to pass to each component.
-// Some components may need additional props.
-interface PropsInterface {
-  auth: AuthInterface;
-}
 
 
 function App() {
