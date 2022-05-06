@@ -5,10 +5,10 @@
 
 
 
-export const Dashboard = () => {
+export const Dashboard = (props: any) => {
 
     return (
-        <div id="dashboard">
+        <div id="dashboard" style={{height: '71.75vh'}}>
             
         </div>
     );

@@ -4,9 +4,6 @@ import {useToken, TokenInterface} from './useToken';
 
 
 export interface AuthInterface {
-    // token: string;
-    // setToken: (token: string) => void;
-    // removeToken: () => void;
     token: TokenInterface;
     logout: () => void;
     login: (email:string, password:string) => void;
