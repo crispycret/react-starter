@@ -19,6 +19,9 @@ function TestComponent (props:any) {
   );
 }
 
+interface PropsInterface {
+  auth: AuthInterface;
+}
 
 
 
