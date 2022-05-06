@@ -9,7 +9,7 @@ import './assets/css/App.css';
 
 
 
-function Header (props:any) {
+function TestComponent (props:any) {
   return (
     <div>
       <h2>{ props.text ? 'None' : '' + props.text }</h2>
@@ -22,7 +22,7 @@ function Header (props:any) {
 function Home (props:any) {
   return (
     <div>
-      <h2>Ham</h2>
+      <h2>Home</h2>
     </div>
   );
 } 
@@ -37,8 +37,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Header props={{text:"Login"}} />} />
-          <Route path='/dashboard' element={<Header props={{text:"Dashboard"}} />} />
+          <Route path='/login' element={<TestComponent props={{text:"Login"}} />} />
+          <Route path='/dashboard' element={<TestComponent props={{text:"Dashboard"}} />} />
         </Routes>
       </BrowserRouter>
 
