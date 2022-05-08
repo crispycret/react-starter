@@ -2,13 +2,22 @@
 
 # React + Flask Starter Kit
 
+### Author: Brandon Nadeau
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [Flask]().
 
-The `Starter Kit` is a working template that comes prebuilt with back-end and front-end user authentication support. \
-Since the project has a front-end and a back-end this project require
+The Starter Kit is a working template that comes prebuilt with back-end and front-end user authentication support.
+\
+Windows Not Yet Supported.
+\
+
+## Clone the project
+```
+git clone https://github.com/crispycret/react-starter.git
+```
+
 
 ## Flask (Back End)
-
 This project uses Python's Flask to serve as the applications bakend API and supports the following features. 
 
 <!-- Create a Table here -->    
@@ -19,12 +28,13 @@ The back-end flask application has been linked to the react project allowing hot
 which speeds up development and allows `npm` to start both the front-end and and back-end applications.
 
 
+
 # React (Front End)
 
 Frontend user interaction is provided using React. \
 All features provided by the back-end API have a corresponding web page as a working example.
 
-The feature `User Authentication` is exampled using multiple web pages to allow selection by personal preference and should be minimized to a single login/signup method.
+The feature `User Authentication` is exampled using multiple web pages to allow user authentication selection by personal preference and should be minimized to a single login/signup method by the developer.
 
 
 # Customizable settings
@@ -57,16 +67,55 @@ You will also see any lint errors in the console.
 
 ## Start Flask
 
-As mentioned above we will be using `npm` to start the flask application. This is doeable after adding both a proxy field that points to the API endpoint and a new command that starts the flask application in the `package.json` file. Open another terminal to start the flask application and run the following.
+As mentioned above we will be using `npm` to start the flask application. This is do-able after adding both a `proxy` field that points to the back-end API end-point and a new command that starts the flask application in the `package.json` file. Open another terminal to start the flask application and run the following commands to setup the flask application.
 
-### `npm run start-backend`
+### Environment setup
+First we need to create and activate a virtual environment in the `backend` folder using the following commands.
+
+```
+cd backend
+python -m venv env
+source env/bin/activate
+```
+
+After creating and activating the venv we need to install the flask applications dependencies using the provided `requirements.txt` file.
+
+```
+pip install -r requirements.txt
+```
+
+### Database Initialization
+
+Now that the environment is ready we can initialize the database for the backend.
+
+```
+flask db init
+flask db migrate -m "Initial Migration"
+flasj db upgrade
+```
+
+With that the back-end setup is complete. Finally start the flask application using `npm` from the root directory.
+
+```
+cd ..
+npm run backend
+```
 
 Runs the flask api in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any errors in the console.
 
+
+<!-- Table goes here -->
+## List of backend api requests
+
+* / -> api information.
+* /login -> access_token
+* /register -> action status
+* /logout -> destroy access_token
+* /users -> list of users
 
 ## Other React Commands
 
