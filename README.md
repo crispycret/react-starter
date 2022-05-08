@@ -14,6 +14,7 @@ Windows Not Yet Supported.
 ## Clone the project
 ```
 git clone https://github.com/crispycret/react-starter.git
+cd react-starter
 ```
 
 
