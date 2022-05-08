@@ -5,6 +5,6 @@ from core import api
 
 @api.route('/')
 def index():
-    greeting = 'hello'
-    return {'greeting': greeting}
+    msg = 'React+Flask Starter Kit'
+    return {'msg': msg}
 
