@@ -17,6 +17,7 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard'
+import Authentication from './pages/Authentication';
 
 
 
@@ -57,8 +58,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home {...props} />} />
+
+          <Route path='/authentication' element={<Authentication {...props} />} />
           <Route path='/login' element={<Login {...props} />} />
           <Route path='/register' element={<Register {...props} />} />
+
           <Route path='/logout' element={<Logout {...props} />} />
           <Route path='/dashboard' element={<Dashboard {...props} />} />
           <Route path='*' element={<NotFound {...props} />} />

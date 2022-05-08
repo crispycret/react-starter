@@ -1,20 +1,28 @@
+# Library Imports
 import time, json
 from datetime import datetime, timedelta, timezone
 
 from flask import Flask, request, jsonify
+from flask_login import current_user
 from flask_jwt_extended import create_access_token, get_jwt, \
     get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager 
-    
-  
 
-from core import api, jwt
+
+# Program Imports
+from .. import db 
+
+# Application Imports
+from . import auth
+from .models import User
+
 
 
 
 # After each request make sure the token is valid.
 # If the token lifetime is near the end, reset the token
-@api.after_request
+@auth.after_request
 def refresh_expiring_jwts(response):
+    """ Return a new access token if the current token is about to expire. """
     try:
         # get and define timestamps to test if token is expiring soon.
         exp_timestamp = get_jwt()['exp']
@@ -38,29 +46,105 @@ def refresh_expiring_jwts(response):
 
 
 
+def validate_user(email, password):
+    """ Return True if the user is valid given the email and password. """
+    user = User.query.filter_by(email=email).one()
+    if user is None: 
+        return {'msg': 'no account exists with this email.'}
+    
+    if not user.check_password(password):
+        return {'msg': 'inccorect password.'}
+    
+    return True    
+
+
+def create_token(email):
+    """ Given an email address, create an access token for the user. """
+    print ("[+] Create Token")        
+    access_token = create_access_token(identity=email)
+    response = {'access_token': access_token}
+    return response
 
 
 
-@api.route('/token', methods=['POST'])
-def create_token():
-    pass
+
+@auth.route('/login', methods=['POST'])
+def login():
+    """ Return a new access token for the user if the provided credentials are valid. """
+    print ("[+] Login")    
+    email = request.json.get('email', None)
+    password = request.json.get('password',)
+
+    # Validate email and password
+    response = validate_user(email, password)
+    if (response is not True): return response
+    
+    return create_token(email)
 
 
 
 
 # Destory the jwt cookie
-@api.route('/logout', methods=['POST'])
+@auth.route('/logout', methods=['POST'])
 def logout():
+    """ Destroy the jwt cookie that holds the users access token. """
+    print ("[+] Logout")    
+    
     response = jsonify({'msg': 'logout success'})
     unset_jwt_cookies(response)
     return response
 
 
 
+@auth.route('/register', methods=['POST'])
+def register():
+    """ Register a new valid user to the database. """
+    print ("[+] Registering")    
+    
+    # If user is logged in, return and error message.
+    if current_user.is_authenticated:
+        return {'msg': 'already logged in', 'status': '01'}
+    
+    username = request.json.get('username')
+    email = request.json.get('email')
+    password = request.json.get('password')
+    
+    # Validate user details.
+    user = User.query.filter_by(username=username).first()
+    if user is not None:
+        return {'msg': 'username already in use', 'status': '02'}
 
+    user = User.query.filter_by(email=email).first()
+    if user is not None:
+        return {'msg': 'email already in use', 'status': '03'}
+        
+    user = User(username=username, email=email)
+    user.set_password(password)
+    
+    db.session.add(user)
+    db.session.commit()
+    
+    return {'msg': 'registration success', 'status': '0'}
+        
+    
+    
+    
 
-
-
+@auth.route('/users', methods=['GET'])
+def get_users():
+    """ Return a list of serialized users witholding security information. """
+    users = User.query.all()
+    
+    data = {'data': [user.serialized for user in User.query.all()]}
+    print ()
+    print ()
+    print ()
+    print (data)
+    print ()
+    print ()
+    print ()
+    
+    return jsonify(data)
 
 
 
