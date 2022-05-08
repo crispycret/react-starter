@@ -34,7 +34,7 @@ function TestComponent (props:any) {
 
 // Interface for the props to pass to each component.
 // Some components may need additional props.
-interface PropsInterface {
+export interface PropsInterface {
   auth: AuthInterface;
 }
 
@@ -42,12 +42,10 @@ interface PropsInterface {
 function App() {
 
 
-  // Authentication module.
-  const auth = Auth();
 
   // Props to pass to each component
   const props: PropsInterface = {
-    auth
+    auth: Auth(),
   }
 
 

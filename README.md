@@ -37,9 +37,16 @@ The feature `User Authentication` is exampled using multiple web pages to allow 
 
 The react application is ready to be used but all features that require back-end support will not work as we have not started the back-end application.
 
-## Start React
+## React
+Install package dependencies
+```
+npm install
+```
 
-### `npm start`
+### Start React
+```
+ npm start
+```
 
 Runs the react app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
