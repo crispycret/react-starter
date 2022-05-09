@@ -7,14 +7,14 @@ export const Logout = (props: any) => {
 
     const createHistory = require("history").createBrowserHistory;
 
+    function logoutCallback(response: any) {
+        console.log("Logout Callback")
+        props.redirect('/')
+    }
+
     useEffect(() => {
 
-        props.auth.logout(); 
-
-        let history = createHistory();
-        history.push("/");
-        let pathUrl = window.location.href;
-        window.location.href = pathUrl;   
+        props.auth.logout(logoutCallback); 
 
     }, []);
 

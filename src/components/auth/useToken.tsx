@@ -33,6 +33,21 @@ export const useToken = (): TokenInterface => {
         return (token !== null && token !== "" && token !== undefined);
     }
 
+    function isValid() {
+        let valid = false;
+        if(!hasToken()) {
+            return valid;
+        }
+
+        // validate token on backend
+
+        if (!valid) {
+            return valid;
+        }
+
+        return true
+    }
+
     return {
         token,
         hasToken,

@@ -1,19 +1,19 @@
 import { useState } from 'react';
 // import { Link } from 'react-router-dom';
-import fe_icon from '../assets/images/fe_icon.png';
+import fe_icon from '../../assets/images/fe_icon.png';
 
 export const AppBar = (props:any) => {
 
-  const [activeDropDown, setActiveDropDown] = useState(false);
+  const [appDropDown, setAppDropDown] = useState(false);
+  const [userDropDown, setUserDropDown] = useState(false);
+  const [notificationsDropDown, setNotificationsDropDown] = useState(false);
 
-  function toggleMenu() {
-    // var menuToggle = document.getElementById('appbar');
-    if (activeDropDown) {
-      setActiveDropDown(false);
-    } else {
-      setActiveDropDown(true);
-    }
+
+  // Toggles the dropdown menu when the width of the browser is shorter than it needs to be.
+  function toggleDropDownMenu(value: boolean, setValue: (newValue:boolean) => void) {
+    setValue(!value);
   }
+
 
 
     return (
@@ -27,12 +27,12 @@ export const AppBar = (props:any) => {
                 id='appbar-toggle'
                 className="navbar-toggler"
                 type="button"
-                data-mdb-toggle="collapse"
+                data-mdb-toggle="dropdown"
                 data-mdb-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
-                onClick={toggleMenu}
+                onClick={(event) => toggleDropDownMenu(appDropDown, setAppDropDown)}
               >
                 <i className="fas fa-bars"></i>
               </button>
@@ -41,7 +41,7 @@ export const AppBar = (props:any) => {
               <div 
                 id="navbarSupportedContent"
                 className="collapse navbar-collapse"
-                style = {{display: activeDropDown ? 'block' : 'none'}} 
+                style = {{display: appDropDown ? 'block' : 'none'}} 
               >
 
                 <a className="navbar-brand mt-2 mt-lg-0" href="/">
@@ -68,15 +68,16 @@ export const AppBar = (props:any) => {
 
 
                 {/* Login Condition */} 
-                { props.auth.token.hasToken() &&
+                {/* User must navigate to dashboard if the window is to small to show more details */}
+                { props.auth.token.hasToken() && !appDropDown &&
               // { true &&
 
               <div className="d-flex align-items-center">
 
-                <a className="text-reset me-3" href="/">
+                {/* <a className="text-reset me-3" href="/">
                   <i className="fas fa-shopping-cart"></i>
                 </a>
-
+ */}
 
                 <div className="dropdown">
                   <a
@@ -86,6 +87,7 @@ export const AppBar = (props:any) => {
                     role="button"
                     data-mdb-toggle="dropdown"
                     aria-expanded="false"
+                    onClick={(event) => toggleDropDownMenu(notificationsDropDown, setNotificationsDropDown)}
                   >
                     <i className="fas fa-bell"></i>
                     <span className="badge rounded-pill badge-notification bg-danger">1</span>
@@ -93,6 +95,10 @@ export const AppBar = (props:any) => {
                   <ul
                     className="dropdown-menu dropdown-menu-end"
                     aria-labelledby="navbarDropdownMenuLink"
+                    style={{
+                      display: notificationsDropDown ? "block" : "none",
+                      margin: "1.25rem 0rem 1rem -5.9rem",
+                    }}
                   >
                     <li>
                       <a className="dropdown-item" href="/">Some news</a>
@@ -106,14 +112,24 @@ export const AppBar = (props:any) => {
                   </ul>
                 </div>
 
-                <div className="dropdown">
+
+
+
+                <div
+                 onMouseEnter={(event) => toggleDropDownMenu(userDropDown, setUserDropDown)}
+                 >
+                <div className="dropdown"
+                //  onMouseLeave={(event) => toggleDropDownMenu(userDropDown, setUserDropDown)}
+                 >
                   <a
                     className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                    href="/"
                     id="navbarDropdownMenuAvatar"
                     role="button"
                     data-mdb-toggle="dropdown"
                     aria-expanded="false"
+                    // onClick={(event) => toggleDropDownMenu(userDropDown, setUserDropDown)}
+                    // onMouseOver={(event) => toggleDropDownMenu(userDropDown, setUserDropDown)}
+                   
                   >
                     {/* <img
                       src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
@@ -124,23 +140,33 @@ export const AppBar = (props:any) => {
                     /> */}
                   <i className="fas fa-user"></i>
                   </a>
-                  <ul
-                    className="dropdown-menu dropdown-menu-end"
-                    aria-labelledby="navbarDropdownMenuAvatar"
-                  >
-                    <li>
-                      <a className="dropdown-item" href="/">My profile</a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/">Settings</a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/">Logout</a>
-                    </li>
-                  </ul>
+                  <div
+
+onMouseLeave={(event:any) => toggleDropDownMenu(userDropDown, setUserDropDown)}
+                      >
+                    <ul
+                      className="dropdown-menu dropdown-menu-end"
+                      aria-labelledby="navbarDropdownMenuAvatar"
+                      style={{
+                        display: userDropDown ?'block': 'none',
+                        margin: "1.25rem 0rem 1rem -5.9rem",
+                      }}
+                    >
+                      <li>
+                        <a className="dropdown-item" href="/">My profile</a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/">Settings</a>
+                      </li>
+                      <li>
+                        <a className="dropdown-item" href="/logout">Logout</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
-              </div>
+                </div>
+                </div>
               
               } 
               {/*  END Login Condition */}

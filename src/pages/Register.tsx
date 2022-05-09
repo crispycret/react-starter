@@ -1,6 +1,7 @@
 
 import {useState} from 'react';
 import {PropsInterface} from '../App'
+import {ResponseCallback, ErrorCallback} from '../components/auth/auth'
 
 
 export interface RegistrationForm {
@@ -45,9 +46,11 @@ export const Register = (props: PropsInterface) => {
             // displayInvalidRegistration();
             return;
         }
-        props.auth.register(email, username, password)
+        props.auth.register(email, username, password, ResponseCallback, ErrorCallback)
         .then((response: any) => {
             console.log(response);
+            // If response signals valid registration, login and redirect to dashboard.
+            
         })
     }
 
