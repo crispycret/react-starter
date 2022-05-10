@@ -8,8 +8,9 @@ import './assets/css/App.css';
 
 import { Auth, AuthInterface } from './components/auth/auth'; 
 
-import AppBar from './components/AppBar'; 
-import Footer from './components/Footer'; 
+import CustomSideBar from './components/nav/CustomSideBar'; 
+import AppBar from './components/nav/AppBar'; 
+import Footer from './components/nav/Footer'; 
 
 import Home from './pages/Home';
 import NotFound from './pages/404';
@@ -52,22 +53,26 @@ function App() {
   return (
     <div id="app">
       
-      <AppBar {...props} />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home {...props} />} />
+      <CustomSideBar />
+      {/* <AppBar {...props} /> */}
 
-          <Route path='/authentication' element={<Authentication {...props} />} />
-          <Route path='/login' element={<Login {...props} />} />
-          <Route path='/register' element={<Register {...props} />} />
 
-          <Route path='/logout' element={<Logout {...props} />} />
-          <Route path='/dashboard' element={<Dashboard {...props} />} />
-          <Route path='*' element={<NotFound {...props} />} />
-        </Routes>
-      </BrowserRouter>
-      <Footer {...props} />
+      <div id="main">
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home {...props} />} />
 
+            <Route path='/authentication' element={<Authentication {...props} />} />
+            <Route path='/login' element={<Login {...props} />} />
+            <Route path='/register' element={<Register {...props} />} />
+
+            <Route path='/logout' element={<Logout {...props} />} />
+            <Route path='/dashboard' element={<Dashboard {...props} />} />
+            <Route path='*' element={<NotFound {...props} />} />
+          </Routes>
+        </BrowserRouter>
+        <Footer {...props} />
+      </div>
     </div>
   );
 }
