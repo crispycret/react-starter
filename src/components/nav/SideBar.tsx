@@ -1,28 +1,103 @@
 
-import '../../assets/css/sidebar.css';
+import {useRef, useState} from 'react';
 
-export const SideBar = () => {
+import '../../assets/css/sidebar.css';
+import fe_icon from '../../assets/images/fe_icon.png';
+
+
+export const Sidebar = (props: any) => {
+
+    const [toggled, setToggled] = useState(false)
+    const menuToggleRef = useRef<HTMLDivElement>(null);
+    const sidebarRef = useRef<HTMLDivElement>(null);
+    
+  /* Set the width of the side navigation to 0 */
+  function closeNav() {
+      
+    let el = document.getElementById("main")
+    if (el === null) return;
+    el.style.marginLeft = "0";
+
+    if (menuToggleRef.current !== null) {
+        menuToggleRef.current.style.paddingLeft = '0';
+    }
+
+    if (sidebarRef.current !== null) {
+        sidebarRef.current.style.width = '0';
+    }
+
+}
+
+    /* Set the width of the side navigation to 250px */
+function openNav() {
+    let el = document.getElementById("main")
+    if (el === null) return;
+    el.style.marginLeft = "250px";
+
+    if (menuToggleRef.current !== null) 
+        menuToggleRef.current.style.paddingLeft = '250px';
+    
+    if (sidebarRef.current !== null) 
+    sidebarRef.current.style.width = '250px';
+}
+
+
+function toggleNav () {
+
+    setToggled(!toggled)
+
+    const onSize = '200px'
+    const offSize = '0'
+    const size = toggled ? onSize : offSize
+
+    let el = document.getElementById("main")
+    if (el === null) return
+    el.style.marginLeft = size
+
+    if (menuToggleRef.current !== null) 
+        menuToggleRef.current.style.paddingLeft = size
+    
+    if (sidebarRef.current !== null) 
+    sidebarRef.current.style.width = size
+
+
+}
+
+
+function logoutCallback(response: any) {
+    console.log("Logout Callback")
+    props.redirect('/')
+}
+  
+
 
     return (
-        <div id="sidebar">
-            <body id="body-pd">
-                <div className="l-navbar" id="nav-bar">
-                    <nav className="nav">
-                        <div> <a href="#" className="nav_logo"> <i className='bx bx-layer nav_logo-icon'></i> <span className="nav_logo-name">BBBootstrap</span> </a>
-                            <div className="nav_list"> <a href="#" className="nav_link active"> <i className='bx bx-grid-alt nav_icon'></i> <span className="nav_name">Dashboard</span> </a> <a href="#" className="nav_link"> <i className='bx bx-user nav_icon'></i> <span className="nav_name">Users</span> </a> <a href="#" className="nav_link"> <i className='bx bx-message-square-detail nav_icon'></i> <span className="nav_name">Messages</span> </a> <a href="#" className="nav_link"> <i className='bx bx-bookmark nav_icon'></i> <span className="nav_name">Bookmark</span> </a> <a href="#" className="nav_link"> <i className='bx bx-folder nav_icon'></i> <span className="nav_name">Files</span> </a> <a href="#" className="nav_link"> <i className='bx bx-bar-chart-alt-2 nav_icon'></i> <span className="nav_name">Stats</span> </a> </div>
-                        </div> <a href="#" className="nav_link"> <i className='bx bx-log-out nav_icon'></i> <span className="nav_name">SignOut</span> </a>
-                    </nav>
+        <>
+            <div id="sidebar" className="sidenav" ref={sidebarRef}>
+                {/* <a className="closebtn" onClick={closeNav}>&times;</a> */}
+                <a href="/engine">Home</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/user/profile">Profile</a>
+                <a href="/user/account">Account</a>
+            </div>
+
+            <div id='topbar' ref={menuToggleRef}>
+                <div className="navbar-brand mt-2 mt-lg-0" >
+                    <i className="fa fa-bars" aria-hidden="true" onClick={toggleNav} />
+
+                    { props.auth.token.hasToken() && 
+                        <i className="fas fa-sign-out-alt" onClick={() => {props.auth.logout(null, null)}} />
+                        // <i className="fas fa-sign-out-alt" />
+                    }
+
                 </div>
-                {/*Container Main start*/}
-                <div className="height-100 bg-light">
-                    <h4>Main Components</h4>
-                </div>
-                {/*Container Main end*/}
-            </body>
-        </div>
+            </div>
+        </> 
     );
+
+
 }
 
 
 
-export default SideBar;
+export default Sidebar;

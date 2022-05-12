@@ -1,11 +1,11 @@
 
 
-import '../../assets/css/sidebar2.scss';
+import '../assets/css/SampleSassDashboard.scss';
 import { useRef } from 'react';
 
 
 
-export const SideBar2 = (props: any) => {
+export const SampleSassDashboard = (props: any) => {
 
   const bodyRef = useRef<HTMLBodyElement>(null);
 
@@ -232,4 +232,4 @@ export const SideBar2 = (props: any) => {
 
 
 
-export default SideBar2;
+export default SampleSassDashboard;

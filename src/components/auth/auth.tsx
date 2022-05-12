@@ -96,10 +96,10 @@ export const Auth = () => {
 
     }).then((response: any) => {
       token.removeToken()
-      responseCallback(response)
+      if (responseCallback !== null) responseCallback(response)
       
     }).catch((error: any) => {
-      errorCallback(error);
+      if (errorCallback !== null) errorCallback(error)
     })
   }
 
@@ -119,11 +119,10 @@ export const Auth = () => {
         password: password
       }
     }).then((response: any) => {
-      token.removeToken()
-      responseCallback(response)
+      if (responseCallback !== null) responseCallback(response)
 
     }).catch((error: any) => {
-      errorCallback(error);
+      if (errorCallback !== null) errorCallback(error)
     })
   }
 

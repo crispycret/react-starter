@@ -8,18 +8,16 @@ import './assets/css/App.css';
 
 import { Auth, AuthInterface } from './components/auth/auth'; 
 
-import CustomSideBar from './components/nav/CustomSideBar'; 
-import AppBar from './components/nav/AppBar'; 
+import Sidebar from './components/nav/Sidebar'; 
 import Footer from './components/nav/Footer'; 
 
 import Home from './pages/Home';
 import NotFound from './pages/404';
-import Login from './pages/Login';
 import Logout from './pages/Logout';
+import Login from './pages/Login';
 import Register from './pages/Register';
-import Dashboard from './pages/Dashboard'
 import Authentication from './pages/Authentication';
-import { dom } from '@fortawesome/fontawesome-svg-core';
+import Dashboard from './pages/SampleSassDashboard'
 
 
 
@@ -69,7 +67,7 @@ function App() {
 
     <div id="app">
 
-      <CustomSideBar />
+      <Sidebar {...props} />
       {/* <AppBar {...props} /> */}
       
       <div id="main">

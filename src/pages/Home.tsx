@@ -12,8 +12,8 @@ export const Home = (props: any) => {
                 <div className="row gx-5 justify-content-center" style={{marginTop: '10vh'}}>
                     <div className="col-lg-6">
                         <div className="text-center my-5">
-                            <h1 className="display-5 fw-bolder text-white mb-2">Fractal Engine</h1>
-                            <p className="lead text-white-50 mb-4">Quickly design and customize your own fractal landscape</p>
+                            <h1 className="display-5 fw-bolder text-white mb-2">React + Flask Starter Kit</h1>
+                            <p className="lead text-white-50 mb-4">Quickly design and customize the starter kit.</p>
                             <div className="d-grid gap-3 d-sm-flex justify-content-sm-center">
                                 <a className="btn btn-primary btn-lg px-4 me-sm-3" 
                                     href="/login">Get Started</a>

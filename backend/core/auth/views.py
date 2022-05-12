@@ -137,11 +137,7 @@ def get_users():
     
     data = {'data': [user.serialized for user in User.query.all()]}
     print ()
-    print ()
-    print ()
     print (data)
-    print ()
-    print ()
     print ()
     
     return jsonify(data)

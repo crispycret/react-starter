@@ -15,7 +15,7 @@ export const Logout = (props: any) => {
     useEffect(() => {
 
         props.auth.logout(logoutCallback); 
-
+        
     }, []);
 
     return (
